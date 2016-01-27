@@ -11,6 +11,8 @@ Level 7
 
 **Requirements**
 
+*Fork this repository and clone it down to your local machine*
+
 Design a multi-page website with the following page designations:
 
 **Students will use HTML, CSS and Javascript to create a fully functioning and attractive website with the following pages:**
