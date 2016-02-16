@@ -1,0 +1,67 @@
+-- MySQL Workbench Synchronization
+-- Generated: 2016-02-01 17:22
+-- Model: New Model
+-- Version: 1.0
+-- Project: Name of the project
+-- Author: Brandon Ching
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+CREATE SCHEMA IF NOT EXISTS `cart_database` DEFAULT CHARACTER SET utf8 ;
+
+CREATE TABLE IF NOT EXISTS `cart_database`.`users` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `email` VARCHAR(100) NULL DEFAULT NULL,
+  `name_first` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `cart_database`.`products` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `price` FLOAT(8,2) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `cart_database`.`orders` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  `users_id` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_orders_users_idx` (`users_id` ASC),
+  CONSTRAINT `fk_orders_users`
+    FOREIGN KEY (`users_id`)
+    REFERENCES `cart_database`.`users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+CREATE TABLE IF NOT EXISTS `cart_database`.`orders_products` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `orders_id` INT(11) NOT NULL,
+  `products_id` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_orders_products_orders1_idx` (`orders_id` ASC),
+  INDEX `fk_orders_products_products1_idx` (`products_id` ASC),
+  CONSTRAINT `fk_orders_products_orders1`
+    FOREIGN KEY (`orders_id`)
+    REFERENCES `cart_database`.`orders` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_orders_products_products1`
+    FOREIGN KEY (`products_id`)
+    REFERENCES `cart_database`.`products` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
