@@ -1,3 +1,28 @@
+<?php
+    include "config.php";
+
+    if(@$_POST['addProduct'])
+    {
+        echo "It's in here";
+        $table1 = $_SESSION['table1'];
+        $table2 = $_SESSION['table2'];
+        $table3 = $_SESSION['table3'];
+        $table4 = $_SESSION['table4'];
+        $table5 = $_SESSION['table5'];
+        $table6 = $_SESSION['table6'];
+        $table7 = $_SESSION['table7'];
+        $table8 = $_SESSION['table8'];
+        $table9 = $_SESSION['table9'];
+
+        echo $table9;
+
+        mysql_query("INSERT INTO `newproject`.`Orders` (`Table1`, `Table2`, `Table3`, `Table4`, `Table5`, `Table6`, `Table7`, `Table8`, `Table9`) VALUES ('".$table1."', '$table2, '$table3', '$table4', '$table5', '$table6', '$table7', '$table8', '$table9')");
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -77,7 +102,7 @@
 </script>
 
 <div class="FormContainer HorizontalFormContainer">
-    <form method="post">
+    <form name="addProduct" method="post">
         <dl>
             <dt><span class="Required">*</span> Credit Card Type:</dt>
             <dd>
@@ -189,6 +214,7 @@
 
         </dl>
 
+        <button type="submit" name="addProduct" value="1">Insert</button>
     </form>
 </div>
 </body>
