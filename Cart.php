@@ -1,30 +1,6 @@
-<?php
-    include "config.php";
-
-    if(@$_POST['addProduct'])
-    {
-        echo "It's in here";
-        $table1 = $_SESSION['table1'];
-        $table2 = $_SESSION['table2'];
-        $table3 = $_SESSION['table3'];
-        $table4 = $_SESSION['table4'];
-        $table5 = $_SESSION['table5'];
-        $table6 = $_SESSION['table6'];
-        $table7 = $_SESSION['table7'];
-        $table8 = $_SESSION['table8'];
-        $table9 = $_SESSION['table9'];
-
-        echo $table9;
-
-        mysql_query("INSERT INTO `newproject`.`Orders` (`Table1`, `Table2`, `Table3`, `Table4`, `Table5`, `Table6`, `Table7`, `Table8`, `Table9`) VALUES ('".$table1."', '$table2, '$table3', '$table4', '$table5', '$table6', '$table7', '$table8', '$table9')");
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
-    }
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
+<!-- Test !-->
 <head>
     <meta charset="UTF-8">
     <title>Shopping Cart Cart</title>
@@ -85,15 +61,19 @@
         <td>Total cost</td>
         <td><?php
             include "config.php";
-            $cost = ($_SESSION["table1"]*100) +
-                ($_SESSION["table2"]*80) +
-                ($_SESSION["table3"]*100) +
-                ($_SESSION["table4"]*90) +
-                ($_SESSION["table5"]*95) +
-                ($_SESSION["table6"]*90) +
-                ($_SESSION["table7"]*90) +
-                ($_SESSION["table8"]) +
-                ($_SESSION["table9"]);
+            $cost = (
+                ($_SESSION["table1"]*90) +
+                ($_SESSION["table2"]*70) +
+                ($_SESSION["table3"]*90) +
+                ($_SESSION["table4"]*80) +
+                ($_SESSION["table5"]*85) +
+                ($_SESSION["table6"]*80) +
+                ($_SESSION["table7"]*80) +
+                ($_SESSION["table8"]*100) +
+                ($_SESSION["table9"]*110) );
+            echo "$";
+            echo $cost;
+            echo  ".00";
             ?></td>
     </tr>
 </table>
@@ -102,7 +82,7 @@
 </script>
 
 <div class="FormContainer HorizontalFormContainer">
-    <form name="addProduct" method="post">
+    <form method="post">
         <dl>
             <dt><span class="Required">*</span> Credit Card Type:</dt>
             <dd>
@@ -211,10 +191,9 @@
                 <input type="text" class="Textbox" name="creditcard_cccvd" id="creditcard_cccvd" value="" size="4" maxlength="4">
             </dd>
 
-
+            <button type="submit" onclick="">Submit</button>
         </dl>
 
-        <button type="submit" name="addProduct" value="1">Insert</button>
     </form>
 </div>
 </body>

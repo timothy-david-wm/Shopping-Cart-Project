@@ -3,6 +3,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "root";
+//test
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=newproject", $username, $password);
